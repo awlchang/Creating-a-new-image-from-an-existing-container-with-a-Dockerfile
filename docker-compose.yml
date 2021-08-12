@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    bt-mqtt-gateway:
+        container_name: bt-mqtt-gateway
+        image: akashic0616/bt-mqtt-gateway:latest    
+        restart: always
+        devices:
+        # the value of "/dev/input/" corresponds to an actual path on the system of Raspberry Pi 4.
+        - /dev/input:/dev/input
+        volumes:
+        - /opt/bt-mqtt-gateway/config.yaml:/config.yaml
+        cap_add:
+        - NET_ADMIN
+        - SYS_ADMIN
+        - SYS_RESOURCE
+        network_mode: host
+        depends_on:
+        - mosquitto
