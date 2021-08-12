@@ -6,8 +6,8 @@ follow the steps below for creating a new image from an existing container with 
 
 2. cd Creating-a-new-image-from-an-existing-container-with-a-Dockerfile/
 
-\# change akashic0616/bt-mqtt-gateway to yours
+#### change akashic0616/bt-mqtt-gateway to yours
 3. docker build -t akashic0616/bt-mqtt-gateway .
 
-\# change akashic0616/bt-mqtt-gateway to yours
+#### change akashic0616/bt-mqtt-gateway to yours
 4. docker push akashic0616/bt-mqtt-gateway
