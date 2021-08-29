@@ -6,14 +6,18 @@ services:
         image: akashic0616/bt-mqtt-gateway:latest    
         restart: always
         devices:
-        # the value of "/dev/input/" corresponds to an actual path on the system of Raspberry Pi 4.
-        - /dev/input:/dev/input
+          # the value of "/dev/input/" corresponds to an actual path on the system of Raspberry Pi 4.
+          - /dev/input:/dev/input
         volumes:
-        - /opt/bt-mqtt-gateway/config.yaml:/config.yaml
+          - /etc/localtime:/etc/localtime:ro
+          - /opt/bt-mqtt-gateway/config.yaml:/config.yaml
+          - /opt/bt-mqtt-gateway/notbarcodereader.txt:/application/notbarcodereader.txt
         cap_add:
-        - NET_ADMIN
-        - SYS_ADMIN
-        - SYS_RESOURCE
+          - NET_ADMIN
+          - SYS_ADMIN
+          - SYS_RESOURCE
         network_mode: host
+        entrypoint: ["/application/wait-for-it.sh", "127.0.0.1:8123", "--timeout=0", "--", "/bin/sh", "-c", "sh /start.sh" ]
         depends_on:
-        - mosquitto
+          - mosquitto
+          - hassio
